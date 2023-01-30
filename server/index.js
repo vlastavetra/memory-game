@@ -4,21 +4,26 @@ const cors = require("cors");
 dotenv.config();
 const mongoose = require("mongoose");
 const scoresRoute = require("./routes/scoresRoute.js");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+
 app.use(express.json());
 app.use(cors({ origin: ['http://localhost:3000'], credentials: true }));
 
+app.use('/user', userRoutes);
+
 app.use("/scores", scoresRoute);
 
-app.use((err, req, res, next) => {
-  res.status(err.statusCode).send(err.message);
-});
 
 app.use("*", (req, res) => {
   res.status(404).send({ message: "Oops page not found" });
+});
+
+app.use((err, req, res, next) => {
+  res.status(err.statusCode).send(err.message);
 });
 
 async function init() {
