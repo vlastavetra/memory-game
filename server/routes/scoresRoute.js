@@ -7,7 +7,7 @@ const {
   getUserLastScores,
   getUserHighestScores
 } = require("../controllers/scoresController.js");
-const { getUserNickname } = require("../middleware/scoresMiddleware");
+const { getUserNickname } = require("../middlewares/scoresMiddleware");
 
 router.route("/").get(getAllScores).post(addScore);
 router.route("/:id").get(getUserNickname, getUserScores);
