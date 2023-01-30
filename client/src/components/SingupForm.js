@@ -51,7 +51,7 @@ function SignupForm({ onClose }) {
         onClose();
       }
     } catch (error) {
-      {
+      {console.log(error)
         setServerError(error.response.data.message);
       }
     }
@@ -60,75 +60,71 @@ function SignupForm({ onClose }) {
     setUser({ ...user, [event.target.id]: event.target.value });
   };
   return (
-    <>
-      <Modal.Header closeButton>
-        <Modal.Title>Sign Up</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="modal-container">
-          <form className="input-container" onSubmit={handleSubmit}>
-            <p>Create an account here!</p>
-            <div
-              className="text-server-error"
-              style={{ display: serverError ? 'block' : 'none' }}
-            >
-              <Alert variant="danger" className="text-error-profile-settings">
-                {serverError}
-              </Alert>
-            </div>
-            <div className="form-first-part">
-              <Form.Group controlId="username">
-                <div className="input-icon">
-                  <Form.Control
-                    type="text"
-                    onChange={handleChange}
-                    value={user.username}
-                    placeholder="Enter your username"
-                  />
-                  <span className="icon-profile">
-                    <FontAwesomeIcon icon={faUser} />
-                  </span>
-                </div>
-              </Form.Group>
-              <Form.Group controlId="firstName">
-                <div className="input-icon">
-                  <Form.Control
-                    type="text"
-                    onChange={handleChange}
-                    value={user.firstName}
-                    placeholder="Enter your first name"
-                  />
-                  <span className="icon-profile">
-                    <FontAwesomeIcon icon={faUser} />
-                  </span>
-                </div>
-              </Form.Group>
-              <Form.Group controlId="lastName">
-                <div className="input-icon">
-                  <Form.Control
-                    type="text"
-                    onChange={handleChange}
-                    value={user.lastName}
-                    placeholder="Enter your last name"
-                  />
-                  <span className="icon-profile">
-                    <FontAwesomeIcon icon={faUser} />
-                  </span>
-                </div>
-              </Form.Group>
-              <Form.Group controlId="email">
-                <div className="input-icon">
-                  <Form.Control
-                    type="email"
-                    onChange={handleChange}
-                    placeholder="Enter your email"
-                    value={user.email}
-                  />
-                  <span className="icon-profile">
-                    <FontAwesomeIcon icon={faEnvelope} title="Email" />
-                  </span>
-                </div>
-              </Form.Group>
+    <Form onSubmit={handleSubmit}>
+      <p>Create an account here</p>
+      <div
+        className="text-server-error"
+        style={{ display: serverError ? "block" : "none" }}
+      >
+        <Alert variant="danger" className="text-error-profile-settings">
+          {serverError}
+        </Alert>
+      </div>
+      <div className="form-first-part">
+        <Form.Group controlId="username">
+          <div className="input-icon">
+            <Form.Control
+              type="text"
+              onChange={handleChange}
+              value={user.username}
+              placeholder="Enter your username"
+            />
+            <span className="icon-profile">
+              <FontAwesomeIcon icon={faUser} />
+            </span>
+          </div>
+        </Form.Group>
+        <Form.Group controlId="firstName">
+          <div className="input-icon">
+            <Form.Control
+              type="text"
+              onChange={handleChange}
+              // id="firstName"
+              value={user.firstName}
+              placeholder="Enter your first name"
+            />
+            <span className="icon-profile">
+              <FontAwesomeIcon icon={faUser} />
+            </span>
+          </div>
+        </Form.Group>
+        <Form.Group controlId="lastName">
+          <div className="input-icon">
+            <Form.Control
+              type="text"
+              onChange={handleChange}
+              // id="lastName"
+              value={user.lastName}
+              placeholder="Enter your last name"
+            />
+            <span className="icon-profile">
+              <FontAwesomeIcon icon={faUser} />
+            </span>
+          </div>
+        </Form.Group>
+        <Form.Group controlId="email">
+          <div className="input-icon">
+            <Form.Control
+              type="email"
+              onChange={handleChange}
+              placeholder="Enter your email"
+              value={user.email}
+            />
+            <span className="icon-profile">
+              <FontAwesomeIcon icon={faEnvelope} title="Email" />
+            </span>
+          </div>
+        </Form.Group>
 
               <Form.Group controlId="password">
                 <div className="input-icon">

@@ -5,13 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 
 function Login({ onClose }) {
-  const { currentUser, setCurrentUser, setLoginUser } = useContext(Context);
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const navigate = useNavigate();
+  const { currentUser, setCurrentUser, setLoginUser } =
+    useContext(Context);
+    const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -21,16 +17,17 @@ function Login({ onClose }) {
 
     const data = { email, password };
     try {
-      const res = await axios.post('http://localhost:8080/user/login', data);
-      alert('User logged successfully');
+      const res = await axios.post("http://localhost:8080/user/login", data);
+      alert("User logged successfully");
 
       const user = JSON.stringify(res.data.user);
-      localStorage.setItem('user', user);
-      localStorage.setItem('userId', res.data.user.id);
-      setLoginUser(true);
-      navigate('/home');
+      localStorage.setItem("user", user);
+      localStorage.setItem("userId", res.data.user.id);
+     setLoginUser(true);
+      navigate("/home");
     } catch (error) {
       alert(error);
+      console.log(error);
     }
   };
 
