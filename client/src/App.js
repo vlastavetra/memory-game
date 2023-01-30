@@ -1,17 +1,22 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React from 'react';
-import ModalLoginSign from './ModalLoginSignup';
-import NavBar from './components/NavBar/NavBar';
 import Home from './pages/Home';
+import Score from './pages/Score';
+import Game from './pages/Game';
+import NavBar from './components/NavBar/NavBar'
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
         <NavBar />
-        <Home />
-        <ModalLoginSign />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/score" element={<Score />} />
+          <Route path="/game" element={<Game />} />
+          {/* <Route path="/profile" element={<Profile />} /> */}
+        </Routes>
       </div>
     </BrowserRouter>
   );
