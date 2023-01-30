@@ -24,13 +24,14 @@ function ModalLoginSign() {
       const toggleForm = () => {
         setOpenLoginModal(!openLoginModal);
       };
-    //   function handleLogout() {
-    //     // setCurrentUser("")
-    //   localStorage.removeItem("user");
-    //   localStorage.removeItem("userId");
-    //   setLoginUser(false);
-    //     navigate("/");
-    //   }
+
+      function handleLogout() {
+        setCurrentUser("")
+      localStorage.removeItem("user");
+      localStorage.removeItem("userId");
+      setLoginUser(false);
+        navigate("/");
+      }
       const loggedIn = localStorage.getItem("userId")
    return (
 

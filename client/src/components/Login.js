@@ -4,9 +4,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Login({ onClose }) {
-  const { currentUser, setCurrentUser, setLoginUser } =
-    useContext(Context);
-    const navigate = useNavigate();
+  const { currentUser, setCurrentUser, setLoginUser } = useContext(Context);
+  const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -18,19 +17,18 @@ function Login({ onClose }) {
     try {
       const res = await axios.post("http://localhost:8080/user/login", data);
       alert("User logged successfully");
-
-      const user = JSON.stringify(res.data.user);
-      localStorage.setItem("user", user);
-      localStorage.setItem("userId", res.data.user.id);
-     setLoginUser(true);
+      console.log(res.data);
+      const userId = res.data.id;
+      const token = res.data.token;
+      localStorage.setItem("userId", userId);
+      localStorage.setItem("token", token);
+      setLoginUser(true);
       navigate("/home");
     } catch (error) {
       alert(error);
+      console.log(error);
     }
   };
-  
-
-
 
   return (
     <form onSubmit={handleLogin}>

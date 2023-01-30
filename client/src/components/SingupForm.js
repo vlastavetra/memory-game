@@ -50,7 +50,7 @@ function SignupForm({ onClose }) {
         onClose();
       }
     } catch (error) {
-      {
+      {console.log(error)
         setServerError(error.response.data.message);
       }
     }
@@ -75,7 +75,6 @@ function SignupForm({ onClose }) {
             <Form.Control
               type="text"
               onChange={handleChange}
-              // id="username"
               value={user.username}
               placeholder="Enter your username"
             />
