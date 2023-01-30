@@ -13,12 +13,12 @@ app.use(cors({ origin: ['http://localhost:3000'], credentials: true }));
 
 app.use("/scores", scoresRoute);
 
-app.use("*", (req, res) => {
-  res.status(404).send({ message: "Oops page not found" });
-});
-
 app.use((err, req, res, next) => {
   res.status(err.statusCode).send(err.message);
+});
+
+app.use("*", (req, res) => {
+  res.status(404).send({ message: "Oops page not found" });
 });
 
 async function init() {

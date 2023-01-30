@@ -1,10 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const { addScore } = require("../controllers/scoresController.js");
+const {
+  addScore,
+  getAllScores,
+  getUserScores,
+  getUserLastScores,
+  getUserHighestScores
+} = require("../controllers/scoresController.js");
+const { getUserNickname } = require("../middleware/scoresMiddleware");
 
-router.route("/").get().post(addScore);
-router.route("/:id").get();
-router.route("/last/:id").get();
-router.route("/high/:id").get();
+router.route("/").get(getAllScores).post(addScore);
+router.route("/:id").get(getUserNickname, getUserScores);
+router.route("/last/:id").get(getUserNickname, getUserLastScores);
+router.route("/high/:id").get(getUserNickname, getUserHighestScores);
 
 module.exports = router;

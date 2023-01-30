@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const ScoreSchema = new mongoose.Schema({
-  userId: { type: String, required: true },
+  nickname: { type: String, required: true },
   score: { type: Number, required: true },
   date: { type: Date, default: Date.now },
 });
@@ -26,4 +26,41 @@ async function getScoresModel() {
   }
 }
 
-module.exports = {addScoreModel, getScoresModel};
+async function getScoresByUserNickname(nickname) {
+  try {
+    const userScores = await Score.find({ nickname: nickname });
+    return userScores;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function getScoresByUserNicknameLast(nickname) {
+  try {
+    const userScores = await Score.find({ nickname: nickname })
+      .sort({ date: -1 })
+      .limit(1);
+    return userScores;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function getScoresByUserNicknameHighest(nickname) {
+  try {
+    const userScores = await Score.find({ nickname: nickname })
+      .sort({ score: -1 })
+      .limit(1);
+    return userScores;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+module.exports = {
+  addScoreModel,
+  getScoresModel,
+  getScoresByUserNickname,
+  getScoresByUserNicknameLast,
+  getScoresByUserNicknameHighest,
+};
