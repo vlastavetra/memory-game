@@ -8,7 +8,7 @@ const Home = () => {
         Memo MEME is a simple memory game build with React and Node JS, one-player or multiplayer.  
     </div>
     <div className='button-container'>
-    <button className='main-button'>PLAY</button>
+    <button className='main-button' href="/game">PLAY</button>
     </div>
 
     </> );
