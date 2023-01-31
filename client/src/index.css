@@ -5,8 +5,9 @@
   margin: 0;
   box-sizing: border-box;
   font-family: 'Roboto Mono', monospace;
+  color: white;
 }
 
 body {
-  background-color: #13005A;
+  background-color: #1B1523;
 }
