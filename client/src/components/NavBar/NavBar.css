@@ -3,10 +3,11 @@
     justify-content: space-between;
     height: 65px;  
     margin: 25px 25px;
-    background: #1C82AD;
+    background: #fcfcfc;
     border-radius: 6px;
     color: #343a40;
     padding: 5px;
     font-weight: 500;
     align-items: center;
   }
+
