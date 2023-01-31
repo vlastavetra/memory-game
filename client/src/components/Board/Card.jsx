@@ -3,14 +3,13 @@ import sound1 from "../../assets/sounds/projector-button-push-6258.mp3";
 import "./Card.css";
 
 const buttonSound = new Audio(sound1);
-
 buttonSound.volume = .2;
+buttonSound.currentTime = .33;
 
 const Card = ({ onClick, card, index, isInactive, isFlipped, isDisabled }) => {
   const handleClick = () => {
     if (isFlipped || isDisabled || isInactive) return;
     onClick(index);
-    buttonSound.currentTime = .33;
     buttonSound.play();
     setTimeout(() => {
         buttonSound.pause();
@@ -27,7 +26,7 @@ const Card = ({ onClick, card, index, isInactive, isFlipped, isDisabled }) => {
         <img src={questionMark} alt="back" />
       </div>
       <div className="card-face card-back-face">
-        <img src={card.image} alt="face" />
+        <img src={card.image} alt="face" draggable="false" />
       </div>
     </div>
   );

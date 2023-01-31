@@ -27,6 +27,14 @@
     text-align: center;
     margin: 0 auto;
 }
+.game header .mode-button {
+    padding: 0 .2rem;
+    margin-left: .6rem;
+}
+.game header .mode-button[data-selected="true"] {
+    color: #efefef;
+    background-color: #343a3f;
+}
 .game footer {
     width: 360px;
     position: relative;

@@ -1,20 +1,28 @@
 .card {
   width: 100%;
   height: 100%;
-  border-radius: none !important;
   box-shadow: 4px 4px #1B1523;
   transition: 0.3s;
   transform-style: preserve-3d;
   position: relative;
   cursor: pointer;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .card:active {
   width: 90%;
   height: 90%;
 }
 .card img {
+  border-radius: .375rem;
   width: 100%;
   height: 100%;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
 }
 .card .card-face {
   backface-visibility: hidden;
