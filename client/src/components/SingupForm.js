@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Alert, Form, Button, Modal } from 'react-bootstrap';
+import React, { useState } from "react";
+import axios from "axios";
+import { Alert, Form, Button } from "react-bootstrap";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
   faLock,
@@ -10,25 +10,22 @@ import {
   faEyeSlash,
   faUnlockAlt,
   faUser,
-} from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-solid-svg-icons";
 
 function SignupForm({ onClose }) {
-  const [serverError, setServerError] = useState('');
+  const [serverMessage, setServerMessage] = useState("");
   const [user, setUser] = useState({
-    email: '',
-    password: '',
-    username: '',
-    lastName: '',
-    firstName: '',
-    confirmPassword: '',
+    email: "",
+    password: "",
+    username: "",
+    lastName: "",
+    firstName: "",
+    confirmPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -42,18 +39,17 @@ function SignupForm({ onClose }) {
     event.preventDefault();
     try {
       const response = await axios.post(
-        'http://localhost:8080/user/signup',
+        "http://localhost:8080/user/signup",
         user
       );
-      if (response.status === 200) {
-        alert('User created successfully');
-        setUser('');
+      if (response.status === 201) {
+        alert("User created successfully");
+        setUser("");
         onClose();
       }
     } catch (error) {
       {
-        console.log(error)
-        setServerError(error.response.data.message);
+        setServerMessage(error.response.data.error);
       }
     }
   };
@@ -65,10 +61,10 @@ function SignupForm({ onClose }) {
       <p>Create an account here</p>
       <div
         className="text-server-error"
-        style={{ display: serverError ? "block" : "none" }}
+        style={{ display: serverMessage ? "block" : "none" }}
       >
         <Alert variant="danger" className="text-error-profile-settings">
-          {serverError}
+          {serverMessage}
         </Alert>
       </div>
       <div className="form-first-part">
@@ -90,7 +86,6 @@ function SignupForm({ onClose }) {
             <Form.Control
               type="text"
               onChange={handleChange}
-              // id="firstName"
               value={user.firstName}
               placeholder="Enter your first name"
             />
@@ -104,7 +99,6 @@ function SignupForm({ onClose }) {
             <Form.Control
               type="text"
               onChange={handleChange}
-              // id="lastName"
               value={user.lastName}
               placeholder="Enter your last name"
             />
@@ -130,7 +124,7 @@ function SignupForm({ onClose }) {
         <Form.Group controlId="password">
           <div className="input-icon">
             <Form.Control
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               onChange={handleChange}
               placeholder="Enter a new password"
               value={user.password}
@@ -146,7 +140,7 @@ function SignupForm({ onClose }) {
         <Form.Group controlId="confirmPassword">
           <div className="input-icon">
             <Form.Control
-              type={showConfirmPassword ? 'text' : 'password'}
+              type={showConfirmPassword ? "text" : "password"}
               onChange={handleChange}
               placeholder="Confirm new password"
               value={user.confirmPassword}
@@ -172,9 +166,6 @@ function SignupForm({ onClose }) {
         </Button>
       </div>
     </Form>
-        // </div >
-      // </Modal.Body >
-    // </>
   );
 }
 export default SignupForm;

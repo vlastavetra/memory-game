@@ -1,33 +1,34 @@
-import React, { useContext, useState } from 'react';
-import Context from '../context/context';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { Modal } from 'react-bootstrap';
+import React, { useContext, useState } from "react";
+import Context from "../context/context";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { Modal } from "react-bootstrap";
+import { Alert, Form, Button} from 'react-bootstrap';
 
 function Login({ onClose }) {
-  const { currentUser, setCurrentUser, setLoginUser } =
-    useContext(Context);
-    const navigate = useNavigate();
-
+  const { currentUser, setCurrentUser, setLoginUser } = useContext(Context);
+  const navigate = useNavigate();
+const [serverError, setServerError] = useState("")
   const handleLogin = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
-    onClose();
 
     const data = { email, password };
     try {
       const res = await axios.post("http://localhost:8080/user/login", data);
       alert("User logged successfully");
-
-      const user = JSON.stringify(res.data.user);
-      localStorage.setItem("user", user);
-      localStorage.setItem("userId", res.data.user.id);
-     setLoginUser(true);
-      navigate("/home");
+      const userId = JSON.stringify(res.data.id);
+      const token = res.data.token;
+      localStorage.setItem("token", token);
+      localStorage.setItem("userId", userId);
+      setLoginUser(true);
+      navigate("/");
+      onClose();
     } catch (error) {
-      alert(error);
-      console.log(error);
+      console.log(error)
+      setServerError(error.response.data.message);
+     
     }
   };
 
@@ -40,6 +41,14 @@ function Login({ onClose }) {
         <div className="modal-container">
           <form className="input-container" onSubmit={handleLogin}>
             <p>We've missed you!</p>
+            <div
+        className="text-server-error"
+        style={{ display: serverError ? "block" : "none" }}
+      >
+        <Alert variant="danger" className="text-error-profile-settings">
+          {serverError}
+        </Alert>
+      </div>
             <label className="email-label">
               Email:
               <input className="input-log" type="email" name="email" />
