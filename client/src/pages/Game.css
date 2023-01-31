@@ -12,6 +12,9 @@
     border-radius: 6px;
     color: #343a40;
 }
+.game h3, .game div, .game span, .game button, .modal-content div, .modal-content button {
+    color: #343a40;
+}
 .game header {
     position: relative;
     width: 100%;
@@ -43,9 +46,9 @@
     justify-content: center;
 }
 .game .board-container {
-    border: 1px solid #dedede;
+    border: 5px solid #1B1523;
     padding: 12px;
-    box-shadow: 0 0 4px 4px #dedede;
+    /* box-shadow: 0 0 4px 4px #dedede; */
     display: grid;
     justify-items: center;
     align-items: stretch;

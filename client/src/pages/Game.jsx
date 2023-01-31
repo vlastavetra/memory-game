@@ -3,32 +3,33 @@ import Modal from 'react-bootstrap/Modal';
 import Board from '../components/Board/Board';
 import shuffleCards from "../utilities/shuffleCards";
 import uniqueCardsArray from "../utilities/uniqueCardsArray";
+import sound1 from "../assets/sounds/winharpsichord-39642.mp3";
 import "./Game.css";
 
 const Game = () => {
 
-  const [cards, setCards] = useState(() =>
-    shuffleCards(uniqueCardsArray.concat(uniqueCardsArray))
-  );
+  const [mode, setMode] = useState("Easy");
+
+  const cardsBasedOnMode = 
+  mode === 'Easy' ? shuffleCards(uniqueCardsArray.slice(0, 6).concat(uniqueCardsArray.slice(0, 6)))
+  : mode === 'Medium' ? shuffleCards(uniqueCardsArray.slice(0, 12).concat(uniqueCardsArray.slice(0, 12)))
+  : mode === 'Hard' ? shuffleCards(uniqueCardsArray.concat(uniqueCardsArray)) : '';
+
+  const [cards, setCards] = useState(cardsBasedOnMode);
   const [openCards, setOpenCards] = useState([]);
   const [clearedCards, setClearedCards] = useState({});
   const [shouldDisableAllCards, setShouldDisableAllCards] = useState(false);
   const [moves, setMoves] = useState(0);
   const [showModal, setShowModal] = useState(false);
-  const [mode, setMode] = useState("Easy");
   
   const [bestScore, setBestScore] = useState(
     JSON.parse(localStorage.getItem("bestScore")) || Number.POSITIVE_INFINITY
   );
-  const [bestScoreEasy, setBestScoreEasy] = useState(
-    JSON.parse(localStorage.getItem("bestScoreEasy")) || Number.POSITIVE_INFINITY
-  );
-  const [bestScoreMedium, setBestScoreMedium] = useState(
-    JSON.parse(localStorage.getItem("bestScoreMedium")) || Number.POSITIVE_INFINITY
-  );
-  const [bestScoreHard, setBestScoreHard] = useState(
-    JSON.parse(localStorage.getItem("bestScoreHard")) || Number.POSITIVE_INFINITY
-  );
+  const [bestScoreForMode, setBestScoreForMode] = useState({
+    Easy: JSON.parse(localStorage.getItem("bestScoreEasy")) || Number.POSITIVE_INFINITY,
+    Medium: JSON.parse(localStorage.getItem("bestScoreMedium")) || Number.POSITIVE_INFINITY,
+    Hard: JSON.parse(localStorage.getItem("bestScoreHard")) || Number.POSITIVE_INFINITY,
+  });
   const timeout = useRef(null);
 
   const disable = () => {
@@ -39,25 +40,13 @@ const Game = () => {
   };
 
   const checkCompletion = () => {
-    console.log('cards', cards.length);
-    console.log('Object.keys(clearedCards).length', Object.keys(clearedCards).length);
     if (Object.keys(clearedCards).length === cards.length / 2) {
+      const winSound = new Audio(sound1);
+      winSound.play();
       setShowModal(true);
-      if (mode === "Easy") {
-        const highScore = Math.min(moves, bestScoreEasy);
-        setBestScoreEasy(highScore);
-        localStorage.setItem("bestScoreEasy", highScore);
-      }
-      if (mode === "Medium") {
-        const highScore = Math.min(moves, bestScoreMedium);
-        setBestScoreMedium(highScore);
-        localStorage.setItem("bestScoreMedium", highScore);
-      }
-      if (mode === "Hard") {
-        const highScore = Math.min(moves, bestScoreHard);
-        setBestScoreHard(highScore);
-        localStorage.setItem("bestScoreHard", highScore);
-      }
+      const highScore = Math.min(moves, bestScoreForMode[mode]);
+      setBestScoreForMode({...bestScoreForMode, mode: highScore});
+      localStorage.setItem("bestScore" + mode, highScore);
     }
   };
 
@@ -102,8 +91,8 @@ const Game = () => {
 
   useEffect(() => {
     handleRestart();
-    setCards(mode === 'Easy' ? shuffleCards(uniqueCardsArray.slice(0, 6).concat(uniqueCardsArray.slice(0, 6))) : mode === 'Medium' ? shuffleCards(uniqueCardsArray.slice(0, 12).concat(uniqueCardsArray.slice(0, 12))) : shuffleCards(uniqueCardsArray.concat(uniqueCardsArray)));
-    setBestScore(mode === 'Easy' ? bestScoreEasy : mode === 'Medium' ? bestScoreMedium : bestScoreHard);
+    setCards(cardsBasedOnMode);
+    setBestScore(bestScoreForMode[mode]);
   }, [mode]);
 
   const checkIsFlipped = (index) => {
@@ -121,7 +110,7 @@ const Game = () => {
     setMoves(0);
     setShouldDisableAllCards(false);
     // set a shuffled deck of cards
-    setCards(mode === 'Easy' ? shuffleCards(uniqueCardsArray.slice(0, 6).concat(uniqueCardsArray.slice(0, 6))) : mode === 'Medium' ? shuffleCards(uniqueCardsArray.slice(0, 12).concat(uniqueCardsArray.slice(0, 12))) : shuffleCards(uniqueCardsArray.concat(uniqueCardsArray)));
+    setCards(cardsBasedOnMode);
   };
 
   const propsForBoard = {
@@ -153,19 +142,9 @@ const Game = () => {
           <div className="moves">
             <span className="bold">Moves:</span> {moves}
           </div>
-          {mode === 'Easy' && localStorage.getItem("bestScoreEasy") && (
+          {localStorage.getItem("bestScore" + mode) && (
             <div className="high-score">
-              <span className="bold">Best Score:</span> {bestScoreEasy}
-            </div>
-          )}
-          {mode === 'Medium' && localStorage.getItem("bestScoreMedium") && (
-            <div className="high-score">
-              <span className="bold">Best Score:</span> {bestScoreMedium}
-            </div>
-          )}
-          {mode === 'Hard' && localStorage.getItem("bestScoreHard") && (
-            <div className="high-score">
-              <span className="bold">Best Score:</span> {bestScoreHard}
+              <span className="bold">Best Score:</span> {bestScoreForMode[mode]}
             </div>
           )}
         </div>
@@ -185,7 +164,7 @@ const Game = () => {
           <Modal.Title>You won! Congratulations.</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          You completed the game in {moves} moves. Your best score in {mode} mode is {mode === 'Easy' ? bestScoreEasy : mode === 'Medium' ? bestScoreMedium : bestScoreHard } moves.
+          You completed the game in {moves} moves. Your best score in {mode} mode is {bestScoreForMode[mode]} moves.
         </Modal.Body>
         <Modal.Footer>
           <button onClick={handleRestart} color="primary">
