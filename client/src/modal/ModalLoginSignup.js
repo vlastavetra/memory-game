@@ -4,6 +4,7 @@ import SignupForm from '../components/SingupForm';
 import Login from '../components/Login';
 import Context from '../context/context.js';
 import { useNavigate } from 'react-router-dom';
+import './ModalLoginSignup.css'
 
 function ModalLoginSign() {
   const {
