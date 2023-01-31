@@ -12,6 +12,9 @@ const NavBar = () => {
         <Container fluid>
           <Nav className="me-auto my-2 my-lg-0">
             <ModalLoginSign />
+            <Nav.Link href="/" className="link">
+              Home
+            </Nav.Link>
             <Nav.Link href="/score" className="link">
               Score
             </Nav.Link>

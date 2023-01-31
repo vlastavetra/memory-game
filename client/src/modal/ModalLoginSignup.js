@@ -4,6 +4,7 @@ import SignupForm from '../components/SingupForm';
 import Login from '../components/Login';
 import Context from '../context/context.js';
 import { useNavigate } from 'react-router-dom';
+import './ModalLoginSignup.css'
 
 function ModalLoginSign() {
   const {
@@ -50,7 +51,7 @@ function ModalLoginSign() {
                 ) : (
                   <SignupForm onClose={toggleModal} />
                 )}
-                <button onClick={toggleForm}>
+                <button className="login-signup-message-button" onClick={toggleForm}>
                   {openLoginModal
                     ? "You don't have an account yet ? Please  : Signup"
                     : 'You already have an account ? Please : Login'}
