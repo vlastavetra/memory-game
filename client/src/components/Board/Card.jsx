@@ -10,15 +10,17 @@ import "./Card.css";
 const hoverSound = new Audio(sound1);
 const buttonSound = new Audio(sound2);
 
+buttonSound.volume = .2;
+
 const Card = ({ onClick, card, index, isInactive, isFlipped, isDisabled }) => {
   const handleClick = () => {
     !isFlipped && !isDisabled && onClick(index);
-    buttonSound.currentTime = 100;
+    buttonSound.currentTime = .33;
     buttonSound.play();
     setTimeout(() => {
         buttonSound.pause();
-        buttonSound.currentTime = 100;
-    }, 300);
+        buttonSound.currentTime = .33;
+    }, 500);
   };
 
   const handleHover = () => {
