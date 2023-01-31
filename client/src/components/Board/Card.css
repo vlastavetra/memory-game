@@ -1,7 +1,7 @@
 .card {
   width: 100%;
   height: 100%;
-  border-radius: none;
+  border-radius: none !important;
   box-shadow: 4px 4px #1B1523;
   transition: 0.3s;
   transform-style: preserve-3d;
@@ -31,4 +31,5 @@
 }
 .card.is-inactive {
   opacity: 0;
+  cursor: auto;
 }

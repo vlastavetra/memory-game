@@ -12,7 +12,7 @@
     border-radius: 6px;
     color: #343a40;
 }
-.game h3, .game div, .game span, .game button, .modal-content div, .modal-content button {
+.game h3, .game div, .game span, .game .mode-button, .modal-content div, .modal-content button {
     color: #343a40;
 }
 .game header {
