@@ -1,7 +1,3 @@
-// import questionMark from ".../assets/questionMark.png";
-// const questionMark = require(`.../assets/questionMark.png`);
-// import sound from '../../../utils/approxPerDay.js'
-// import otherstuff from '../components/otherstuff'
 import questionMark from "../../assets/questionMark.png";
 import sound1 from "../../assets/sounds/projector-button-push-6258.mp3";
 import "./Card.css";
@@ -21,8 +17,6 @@ const Card = ({ onClick, card, index, isInactive, isFlipped, isDisabled }) => {
         buttonSound.currentTime = .33;
     }, 500);
   };
-
-  const cardStyle = {  }
 
   return (
     <div

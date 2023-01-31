@@ -53,10 +53,6 @@ const Game = () => {
     }
   };
 
-  useEffect(() => {
-    console.log('clearedCards', clearedCards);
-  }, [clearedCards])
-
   const evaluate = () => {
     const [first, second] = openCards;
     enable();
