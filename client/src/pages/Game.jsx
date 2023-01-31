@@ -3,22 +3,33 @@ import Modal from 'react-bootstrap/Modal';
 import Board from '../components/Board/Board';
 import shuffleCards from "../utilities/shuffleCards";
 import uniqueCardsArray from "../utilities/uniqueCardsArray";
+import sound1 from "../assets/sounds/winharpsichord-39642.mp3";
 import "./Game.css";
 
 const Game = () => {
 
+  const [mode, setMode] = useState("Easy");
 
-  const [cards, setCards] = useState(() =>
-    shuffleCards(uniqueCardsArray.concat(uniqueCardsArray))
-  );
+  const cardsBasedOnMode = 
+  mode === 'Easy' ? shuffleCards(uniqueCardsArray.slice(0, 6).concat(uniqueCardsArray.slice(0, 6)))
+  : mode === 'Medium' ? shuffleCards(uniqueCardsArray.slice(0, 12).concat(uniqueCardsArray.slice(0, 12)))
+  : mode === 'Hard' ? shuffleCards(uniqueCardsArray.concat(uniqueCardsArray)) : '';
+
+  const [cards, setCards] = useState(cardsBasedOnMode);
   const [openCards, setOpenCards] = useState([]);
   const [clearedCards, setClearedCards] = useState({});
   const [shouldDisableAllCards, setShouldDisableAllCards] = useState(false);
   const [moves, setMoves] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  
   const [bestScore, setBestScore] = useState(
     JSON.parse(localStorage.getItem("bestScore")) || Number.POSITIVE_INFINITY
   );
+  const [bestScoreForMode, setBestScoreForMode] = useState({
+    Easy: JSON.parse(localStorage.getItem("bestScoreEasy")) || Number.POSITIVE_INFINITY,
+    Medium: JSON.parse(localStorage.getItem("bestScoreMedium")) || Number.POSITIVE_INFINITY,
+    Hard: JSON.parse(localStorage.getItem("bestScoreHard")) || Number.POSITIVE_INFINITY,
+  });
   const timeout = useRef(null);
 
   const disable = () => {
@@ -29,11 +40,13 @@ const Game = () => {
   };
 
   const checkCompletion = () => {
-    if (Object.keys(clearedCards).length === uniqueCardsArray.length) {
+    if (Object.keys(clearedCards).length === cards.length / 2) {
+      const winSound = new Audio(sound1);
+      winSound.play();
       setShowModal(true);
-      const highScore = Math.min(moves, bestScore);
-      setBestScore(highScore);
-      localStorage.setItem("bestScore", highScore);
+      const highScore = Math.min(moves, bestScoreForMode[mode]);
+      setBestScoreForMode({...bestScoreForMode, mode: highScore});
+      localStorage.setItem("bestScore" + mode, highScore);
     }
   };
 
@@ -50,6 +63,7 @@ const Game = () => {
       setOpenCards([]);
     }, 500);
   };
+  
   const handleCardClick = (index) => {
     if (openCards.length === 1) {
       setOpenCards((prev) => [...prev, index]);
@@ -75,6 +89,12 @@ const Game = () => {
     checkCompletion();
   }, [clearedCards]);
 
+  useEffect(() => {
+    handleRestart();
+    setCards(cardsBasedOnMode);
+    setBestScore(bestScoreForMode[mode]);
+  }, [mode]);
+
   const checkIsFlipped = (index) => {
     return openCards.includes(index);
   };
@@ -90,7 +110,7 @@ const Game = () => {
     setMoves(0);
     setShouldDisableAllCards(false);
     // set a shuffled deck of cards
-    setCards(shuffleCards(uniqueCardsArray.concat(uniqueCardsArray)));
+    setCards(cardsBasedOnMode);
   };
 
   const propsForBoard = {
@@ -98,7 +118,8 @@ const Game = () => {
     checkIsInactive,
     checkIsFlipped,
     handleCardClick,
-    cards
+    cards,
+    mode
   }
 
 
@@ -109,6 +130,9 @@ const Game = () => {
         <div>
           Select two cards with same content consequtively to make them vanish
         </div>
+        <div>
+          Mode: <button type="button" onClick={() => setMode('Easy')}>Easy</button> <button type="button" onClick={() => setMode('Medium')}>Medium</button> <button type="button" onClick={() => setMode('Hard')}>Hard</button> 
+        </div>
       </header>
 
       <Board {...propsForBoard} />
@@ -118,9 +142,9 @@ const Game = () => {
           <div className="moves">
             <span className="bold">Moves:</span> {moves}
           </div>
-          {localStorage.getItem("bestScore") && (
+          {localStorage.getItem("bestScore" + mode) && (
             <div className="high-score">
-              <span className="bold">Best Score:</span> {bestScore}
+              <span className="bold">Best Score:</span> {bestScoreForMode[mode]}
             </div>
           )}
         </div>
@@ -140,7 +164,7 @@ const Game = () => {
           <Modal.Title>You won! Congratulations.</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          You completed the game in {moves} moves. Your best score is {bestScore} moves.
+          You completed the game in {moves} moves. Your best score in {mode} mode is {bestScoreForMode[mode]} moves.
         </Modal.Body>
         <Modal.Footer>
           <button onClick={handleRestart} color="primary">

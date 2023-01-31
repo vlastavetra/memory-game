@@ -1,9 +1,9 @@
 import React from 'react';
 import Card from './Card';
 
-const Board = ({shouldDisableAllCards, checkIsInactive, checkIsFlipped, handleCardClick, cards}) => {
+const Board = ({shouldDisableAllCards, checkIsInactive, checkIsFlipped, handleCardClick, cards, mode}) => {
     return ( 
-        <div className="board-container">
+        <div className={`board-container ${mode.toLowerCase()}`}>
         {cards.map((card, index) => {
           return (
             <Card
