@@ -51,7 +51,7 @@ function ModalLoginSign() {
                 ) : (
                   <SignupForm onClose={toggleModal} />
                 )}
-                <button onClick={toggleForm}>
+                <button className="login-signup-message-button" onClick={toggleForm}>
                   {openLoginModal
                     ? "You don't have an account yet ? Please  : Signup"
                     : 'You already have an account ? Please : Login'}

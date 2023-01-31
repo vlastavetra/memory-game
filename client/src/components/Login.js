@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import { Alert, Form, Button} from 'react-bootstrap';
+import './Login.css'
 
 function Login({ onClose }) {
   const { currentUser, setCurrentUser, setLoginUser } = useContext(Context);
@@ -34,10 +35,10 @@ const [serverError, setServerError] = useState("")
 
   return (
     <>
-      <Modal.Header closeButton>
-        <Modal.Title>Login</Modal.Title>
+      <Modal.Header closeButton className="modal-body-container">
+        <Modal.Title className="modal-body-container">Login</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="modal-body-container" >
         <div className="modal-container">
           <form className="input-container" onSubmit={handleLogin}>
             <p>We've missed you!</p>
@@ -59,7 +60,7 @@ const [serverError, setServerError] = useState("")
             </label>
 
             <div className="btns">
-              <button type="submit"> Login</button>
+              <button className="btns-login" type="submit"> Login</button>
             </div>
           </form>
         </div>
