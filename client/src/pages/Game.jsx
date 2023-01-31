@@ -125,7 +125,7 @@ const Game = () => {
           )}
         </div>
         <div className="restart">
-          <button onClick={handleRestart} color="primary" variant="contained">
+          <button className="button-restart" onClick={handleRestart} color="primary" variant="contained">
             Restart
           </button>
         </div>

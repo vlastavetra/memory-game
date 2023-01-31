@@ -102,7 +102,8 @@ function SignupForm({ onClose }) {
               onChange={handleChange}
               value={user.lastName}
               placeholder="Enter your last name"
-            />
+            />              
+
             <span className="icon-profile">
               <FontAwesomeIcon icon={faUser} />
             </span>
