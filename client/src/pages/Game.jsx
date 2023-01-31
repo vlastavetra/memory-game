@@ -10,10 +10,12 @@ const Game = () => {
 
   const [mode, setMode] = useState("Easy");
 
+  const shuffledCards = shuffleCards(uniqueCardsArray);
+
   const cardsBasedOnMode = shuffleCards(
-  mode === 'Easy' ? uniqueCardsArray.slice(0, 6).concat(uniqueCardsArray.slice(0, 6)) :
-  mode === 'Medium' ? uniqueCardsArray.slice(0, 12).concat(uniqueCardsArray.slice(0, 12)) :
-  mode === 'Hard' ? uniqueCardsArray.concat(uniqueCardsArray) : '' );
+  mode === 'Easy' ? shuffledCards.slice(0, 6).concat(shuffledCards.slice(0, 6)) :
+  mode === 'Medium' ? shuffledCards.slice(0, 12).concat(shuffledCards.slice(0, 12)) :
+  mode === 'Hard' ? shuffledCards.concat(shuffledCards) : '' );
 
   const [cards, setCards] = useState(cardsBasedOnMode);
   const [openCards, setOpenCards] = useState([]);

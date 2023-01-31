@@ -38,6 +38,10 @@
   box-shadow: -4px 4px hsl(198, 72%, 20%);
 }
 .card.is-inactive {
-  opacity: 0;
+  opacity: 13%;
   cursor: auto;
+}
+.card.is-inactive:active {
+  width: 100%;
+  height: 100%;
 }
