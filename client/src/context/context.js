@@ -1,17 +1,31 @@
-import { createContext, useState } from 'react';
-
+import { createContext, useState } from "react";
+import axios from "axios";
 const Context = createContext();
 
 function Provider({ children }) {
-  const [currentUser, setCurrentUser] = useState(
- {}
-  );
-
-  const [serverMessage, setServerMessage] = useState('');
+  const [currentUser, setCurrentUser] = useState({});
+  const [serverMessage, setServerMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const toggleModal = () => setIsOpen(!isOpen);
   const [loginUser, setLoginUser] = useState(false);
+  const userId = localStorage.getItem("userId");
+  
+  const getUserInfos = async () => {
+    const token = localStorage.getItem("token");
+    const headerConfig = { headers: { Authorization: `Bearer ${token}` } };
+    try {
+      const res = await axios.get(
+        `http://localhost:8080/user/${userId}`,
+        headerConfig
+      );
+      console.log(res.data);
+     
+    } catch (error) {
+      console.log(error);
+      alert(error.response.data.error);
+    }
+  };
 
   const valueToShare = {
     currentUser,
@@ -23,20 +37,9 @@ function Provider({ children }) {
     setOpenLoginModal,
     loginUser,
     setLoginUser,
-   
+    getUserInfos
   };
-  //   const getUserById = async () => {
-  //     try {
-  //       const res = await axios.get("http://localhost:8080/user/id");
-  //       console.log(res)
-  //     } catch (error) {
-  //       alert(error);
-  //     }
-  //   };
-  //   useEffect(()=> {
-  //    getUserById()
 
-  //   }, [])
 
   return <Context.Provider value={valueToShare}>{children}</Context.Provider>;
 }

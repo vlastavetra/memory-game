@@ -19,7 +19,7 @@ const [serverError, setServerError] = useState("")
     try {
       const res = await axios.post("http://localhost:8080/user/login", data);
       alert("User logged successfully");
-      const userId = JSON.stringify(res.data.id);
+      const userId = (res.data.id);
       const token = res.data.token;
       localStorage.setItem("token", token);
       localStorage.setItem("userId", userId);
