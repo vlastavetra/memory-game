@@ -8,18 +8,18 @@ import { useNavigate } from 'react-router-dom';
 function ModalLoginSign() {
   const {
     setCurrentUser,
-    setUser,
     toggleModal,
     isOpen,
     openLoginModal,
     setOpenLoginModal,
     loginUser,
     setLoginUser,
+    successSignup,
+    setSuccessSignup,
   } = useContext(Context);
   const navigate = useNavigate();
 
   function handleLogout() {
-    setUser('');
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     setLoginUser(false);
@@ -29,13 +29,9 @@ function ModalLoginSign() {
   const toggleForm = () => {
     setOpenLoginModal(!openLoginModal);
   };
-  //   function handleLogout() {
-  //     // setCurrentUser("")
-  //   localStorage.removeItem("user");
-  //   localStorage.removeItem("userId");
-  //   setLoginUser(false);
-  //     navigate("/");
-  //   }
+   
+ 
+ 
   const loggedIn = localStorage.getItem('userId');
   return (
     <div>

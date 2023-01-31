@@ -4,9 +4,10 @@ const Context = createContext();
 
 function Provider({ children }) {
   const [currentUser, setCurrentUser] = useState(
-    JSON.parse(localStorage.getItem('user')) || {}
+ {}
   );
 
+  const [serverMessage, setServerMessage] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const toggleModal = () => setIsOpen(!isOpen);
@@ -22,6 +23,7 @@ function Provider({ children }) {
     setOpenLoginModal,
     loginUser,
     setLoginUser,
+   
   };
   //   const getUserById = async () => {
   //     try {
