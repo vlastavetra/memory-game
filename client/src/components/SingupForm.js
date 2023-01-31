@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Alert, Form, Button } from "react-bootstrap";
+import './SignupForm.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -57,7 +58,7 @@ function SignupForm({ onClose }) {
     setUser({ ...user, [event.target.id]: event.target.value });
   };
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form className="form-container" onSubmit={handleSubmit}>
       <p>Create an account here</p>
       <div
         className="text-server-error"
