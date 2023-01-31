@@ -7,7 +7,6 @@ import "./Game.css";
 
 const Game = () => {
 
-
   const [cards, setCards] = useState(() =>
     shuffleCards(uniqueCardsArray.concat(uniqueCardsArray))
   );
@@ -16,8 +15,19 @@ const Game = () => {
   const [shouldDisableAllCards, setShouldDisableAllCards] = useState(false);
   const [moves, setMoves] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [mode, setMode] = useState("Easy");
+  
   const [bestScore, setBestScore] = useState(
     JSON.parse(localStorage.getItem("bestScore")) || Number.POSITIVE_INFINITY
+  );
+  const [bestScoreEasy, setBestScoreEasy] = useState(
+    JSON.parse(localStorage.getItem("bestScoreEasy")) || Number.POSITIVE_INFINITY
+  );
+  const [bestScoreMedium, setBestScoreMedium] = useState(
+    JSON.parse(localStorage.getItem("bestScoreMedium")) || Number.POSITIVE_INFINITY
+  );
+  const [bestScoreHard, setBestScoreHard] = useState(
+    JSON.parse(localStorage.getItem("bestScoreHard")) || Number.POSITIVE_INFINITY
   );
   const timeout = useRef(null);
 
@@ -29,11 +39,25 @@ const Game = () => {
   };
 
   const checkCompletion = () => {
-    if (Object.keys(clearedCards).length === uniqueCardsArray.length) {
+    console.log('cards', cards.length);
+    console.log('Object.keys(clearedCards).length', Object.keys(clearedCards).length);
+    if (Object.keys(clearedCards).length === cards.length / 2) {
       setShowModal(true);
-      const highScore = Math.min(moves, bestScore);
-      setBestScore(highScore);
-      localStorage.setItem("bestScore", highScore);
+      if (mode === "Easy") {
+        const highScore = Math.min(moves, bestScoreEasy);
+        setBestScoreEasy(highScore);
+        localStorage.setItem("bestScoreEasy", highScore);
+      }
+      if (mode === "Medium") {
+        const highScore = Math.min(moves, bestScoreMedium);
+        setBestScoreMedium(highScore);
+        localStorage.setItem("bestScoreMedium", highScore);
+      }
+      if (mode === "Hard") {
+        const highScore = Math.min(moves, bestScoreHard);
+        setBestScoreHard(highScore);
+        localStorage.setItem("bestScoreHard", highScore);
+      }
     }
   };
 
@@ -50,6 +74,7 @@ const Game = () => {
       setOpenCards([]);
     }, 500);
   };
+  
   const handleCardClick = (index) => {
     if (openCards.length === 1) {
       setOpenCards((prev) => [...prev, index]);
@@ -75,6 +100,12 @@ const Game = () => {
     checkCompletion();
   }, [clearedCards]);
 
+  useEffect(() => {
+    handleRestart();
+    setCards(mode === 'Easy' ? shuffleCards(uniqueCardsArray.slice(0, 6).concat(uniqueCardsArray.slice(0, 6))) : mode === 'Medium' ? shuffleCards(uniqueCardsArray.slice(0, 12).concat(uniqueCardsArray.slice(0, 12))) : shuffleCards(uniqueCardsArray.concat(uniqueCardsArray)));
+    setBestScore(mode === 'Easy' ? bestScoreEasy : mode === 'Medium' ? bestScoreMedium : bestScoreHard);
+  }, [mode]);
+
   const checkIsFlipped = (index) => {
     return openCards.includes(index);
   };
@@ -90,7 +121,7 @@ const Game = () => {
     setMoves(0);
     setShouldDisableAllCards(false);
     // set a shuffled deck of cards
-    setCards(shuffleCards(uniqueCardsArray.concat(uniqueCardsArray)));
+    setCards(mode === 'Easy' ? shuffleCards(uniqueCardsArray.slice(0, 6).concat(uniqueCardsArray.slice(0, 6))) : mode === 'Medium' ? shuffleCards(uniqueCardsArray.slice(0, 12).concat(uniqueCardsArray.slice(0, 12))) : shuffleCards(uniqueCardsArray.concat(uniqueCardsArray)));
   };
 
   const propsForBoard = {
@@ -98,7 +129,8 @@ const Game = () => {
     checkIsInactive,
     checkIsFlipped,
     handleCardClick,
-    cards
+    cards,
+    mode
   }
 
 
@@ -109,6 +141,9 @@ const Game = () => {
         <div>
           Select two cards with same content consequtively to make them vanish
         </div>
+        <div>
+          Mode: <button type="button" onClick={() => setMode('Easy')}>Easy</button> <button type="button" onClick={() => setMode('Medium')}>Medium</button> <button type="button" onClick={() => setMode('Hard')}>Hard</button> 
+        </div>
       </header>
 
       <Board {...propsForBoard} />
@@ -118,9 +153,19 @@ const Game = () => {
           <div className="moves">
             <span className="bold">Moves:</span> {moves}
           </div>
-          {localStorage.getItem("bestScore") && (
+          {mode === 'Easy' && localStorage.getItem("bestScoreEasy") && (
             <div className="high-score">
-              <span className="bold">Best Score:</span> {bestScore}
+              <span className="bold">Best Score:</span> {bestScoreEasy}
+            </div>
+          )}
+          {mode === 'Medium' && localStorage.getItem("bestScoreMedium") && (
+            <div className="high-score">
+              <span className="bold">Best Score:</span> {bestScoreMedium}
+            </div>
+          )}
+          {mode === 'Hard' && localStorage.getItem("bestScoreHard") && (
+            <div className="high-score">
+              <span className="bold">Best Score:</span> {bestScoreHard}
             </div>
           )}
         </div>
@@ -140,7 +185,7 @@ const Game = () => {
           <Modal.Title>You won! Congratulations.</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          You completed the game in {moves} moves. Your best score is {bestScore} moves.
+          You completed the game in {moves} moves. Your best score in {mode} mode is {mode === 'Easy' ? bestScoreEasy : mode === 'Medium' ? bestScoreMedium : bestScoreHard } moves.
         </Modal.Body>
         <Modal.Footer>
           <button onClick={handleRestart} color="primary">

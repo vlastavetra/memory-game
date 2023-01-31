@@ -1,4 +1,4 @@
-const uniqueCardsArray = [
+const uniqueCardsArraySmall = [
     {
         index: "01",
         image: require(`../assets/memes/01.jpg`)
@@ -25,7 +25,7 @@ const uniqueCardsArray = [
     }
 ];
 
-const uniqueCardsArrayFull = [
+const uniqueCardsArray = [
     {
         index: "01",
         image: require(`../assets/memes/01.jpg`)

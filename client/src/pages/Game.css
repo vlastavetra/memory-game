@@ -10,6 +10,7 @@
     padding: 25px 25px;
     background: #1C82AD;
     border-radius: 6px;
+    color: #343a40;
 }
 .game header {
     position: relative;
@@ -46,14 +47,28 @@
     padding: 12px;
     box-shadow: 0 0 4px 4px #dedede;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(6, 1fr);
     justify-items: center;
     align-items: stretch;
     gap: 1rem;
     margin: 0 auto;
-    width: 540px;
-    height: 540px;
     perspective: 100%;
     max-width: 720px;
+}
+.game .hard {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    width: 540px;
+    height: 540px;
+}
+.game .medium {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    width: 540px;
+    height: 360px;
+}
+.game .easy {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 360px;
+    height: 270px;
 }
