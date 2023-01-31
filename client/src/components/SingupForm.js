@@ -51,7 +51,8 @@ function SignupForm({ onClose }) {
         onClose();
       }
     } catch (error) {
-      {console.log(error)
+      {
+        console.log(error)
         setServerError(error.response.data.message);
       }
     }
@@ -126,54 +127,54 @@ function SignupForm({ onClose }) {
           </div>
         </Form.Group>
 
-              <Form.Group controlId="password">
-                <div className="input-icon">
-                  <Form.Control
-                    type={showPassword ? 'text' : 'password'}
-                    onChange={handleChange}
-                    placeholder="Enter a new password"
-                    value={user.password}
-                  />
-                  <span className="eye-icon" onClick={togglePasswordVisibility}>
-                    <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
-                  </span>
-                  <span className="icon-profile">
-                    <FontAwesomeIcon icon={faUnlockAlt} title="Password" />
-                  </span>
-                </div>
-              </Form.Group>
-              <Form.Group controlId="confirmPassword">
-                <div className="input-icon">
-                  <Form.Control
-                    type={showConfirmPassword ? 'text' : 'password'}
-                    onChange={handleChange}
-                    placeholder="Confirm new password"
-                    value={user.confirmPassword}
-                  />
-                  <span
-                    className="eye-icon"
-                    onClick={toggleConfirmPasswordVisibility}
-                  >
-                    <FontAwesomeIcon
-                      icon={showConfirmPassword ? faEyeSlash : faEye}
-                    />
-                  </span>
-                  <span className="icon-profile">
-                    <FontAwesomeIcon icon={faLock} title="Confirm Password" />
-                  </span>
-                </div>
-              </Form.Group>
-            </div>
+        <Form.Group controlId="password">
+          <div className="input-icon">
+            <Form.Control
+              type={showPassword ? 'text' : 'password'}
+              onChange={handleChange}
+              placeholder="Enter a new password"
+              value={user.password}
+            />
+            <span className="eye-icon" onClick={togglePasswordVisibility}>
+              <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+            </span>
+            <span className="icon-profile">
+              <FontAwesomeIcon icon={faUnlockAlt} title="Password" />
+            </span>
+          </div>
+        </Form.Group>
+        <Form.Group controlId="confirmPassword">
+          <div className="input-icon">
+            <Form.Control
+              type={showConfirmPassword ? 'text' : 'password'}
+              onChange={handleChange}
+              placeholder="Confirm new password"
+              value={user.confirmPassword}
+            />
+            <span
+              className="eye-icon"
+              onClick={toggleConfirmPasswordVisibility}
+            >
+              <FontAwesomeIcon
+                icon={showConfirmPassword ? faEyeSlash : faEye}
+              />
+            </span>
+            <span className="icon-profile">
+              <FontAwesomeIcon icon={faLock} title="Confirm Password" />
+            </span>
+          </div>
+        </Form.Group>
+      </div>
 
-            <div className="btns">
-              <Button type="submit" className="submit-btn-signup">
-                Sign Up
-              </Button>
-            </div>
-          </form>
-        </div>
-      </Modal.Body>
-    </>
+      <div className="btns">
+        <Button type="submit" className="submit-btn-signup">
+          Sign Up
+        </Button>
+      </div>
+    </Form>
+        // </div >
+      // </Modal.Body >
+    // </>
   );
 }
 export default SignupForm;
