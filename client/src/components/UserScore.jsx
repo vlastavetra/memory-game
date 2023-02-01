@@ -6,7 +6,7 @@ const UserScore = () => {
   const [userLastScore, setUserLastScore] = useState("");
   const [userHighScore, setUserHighScore] = useState("");
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   const getUserLastScore = async () => {
     if (userId) {
