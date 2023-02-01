@@ -168,9 +168,9 @@ const Game = () => {
         keyboard={false}
       >
         <Modal.Header className="message-header">
-          <Modal.Title>You won! Congratulations.</Modal.Title>
+          <Modal.Title className="text-white">You won! Congratulations.</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="text-white">
           You completed the game in {moves} moves. Your best score in {mode} mode is {bestScoreForMode[mode]} moves.
         </Modal.Body>
         <Modal.Footer className="message-header">
