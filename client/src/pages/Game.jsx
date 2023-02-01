@@ -6,6 +6,7 @@ import uniqueCardsArray from "../utilities/uniqueCardsArray";
 import sound1 from "../assets/sounds/winharpsichord-39642.mp3";
 import sound2 from "../assets/sounds/clickselect2-92097.mp3";
 import sound3 from "../assets/sounds/computer-processing-sound-effects-short-click-select-03-122132.mp3";
+import sound4 from "../assets/sounds/button-pressed-38129.mp3";
 import "./Game.css";
 
 const Game = () => {
@@ -55,6 +56,8 @@ const Game = () => {
     const [first, second] = openCards;
     enable();
     if (cards[first].index === cards[second].index) {
+      const matchSound = new Audio(sound4);
+      matchSound.play();
       setClearedCards((prev) => ({ ...prev, [cards[first].index]: true }));
       setOpenCards([]);
       return;
