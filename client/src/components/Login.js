@@ -17,7 +17,7 @@ const [serverError, setServerError] = useState("")
 
     const data = { email, password };
     try {
-      const res = await axios.post("http://localhost:8080/user/login", data);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}user/login`, data);
       alert("User logged successfully");
       const userId = (res.data.id);
       const token = res.data.token;

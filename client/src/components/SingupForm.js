@@ -40,7 +40,7 @@ function SignupForm({ onClose }) {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/user/signup",
+        `$${process.env.REACT_APP_SERVER_URL}user/signup`,
         user
       );
       if (response.status === 201) {
