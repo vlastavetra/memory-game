@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import logo from "./logo.png";
 import "./Home.css";
 
@@ -13,9 +14,9 @@ const Home = () => {
       if you have an account. Memo MEME is a simple memory game built with React and Node JS, single or multiplayer. 
       On the game page, select 2 cards, until you find 2 identical cards. As soon as you find 2 identical cards, you win points.</div>
       <div className="button-container">
-        <a href="/game">
+        <NavLink to="/game">
           <button className="main-button">PLAY</button>
-        </a>
+        </NavLink>
       </div>
     </>
   );
