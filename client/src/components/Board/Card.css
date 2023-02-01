@@ -10,6 +10,11 @@
   -ms-user-select: none;
   user-select: none;
 }
+.card:hover {
+  width: 101%;
+  height: 101%;
+  box-shadow: 6px 6px #1B1523;
+}
 .card:active {
   width: 90%;
   height: 90%;
