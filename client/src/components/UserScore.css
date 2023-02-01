@@ -1,0 +1,13 @@
+.user-score-container {
+  display: flex;
+  width: 70%;
+  margin: 0 auto 50px;
+  gap: 30px;
+  border: 1px solid white;
+  padding: 15px;
+}
+
+.user-score {
+  width: 50%;
+  font-size: 24px;
+}

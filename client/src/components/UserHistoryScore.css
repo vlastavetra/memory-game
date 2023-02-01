@@ -1,0 +1,31 @@
+.score-table-container {
+  display: inline-block;
+  width: 50%;
+}
+
+.score-title-h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.score-table {
+  width: 100%;
+}
+  
+.score-table-head {
+  border-bottom: 1px solid white;
+}
+
+.score-table-head-column {
+  padding: 10px;
+  font-size: 18px;
+}
+
+.score-table-body-column {
+  padding: 8px 10px;
+  font-size: 16px;
+}
+  
+.score-table-body-row:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.1);
+}

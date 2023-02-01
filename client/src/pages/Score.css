@@ -1,9 +1,12 @@
-.main-usermatch-container {
+.main-score-container {
   margin: 40px auto 120px;
-  width: 70%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
  
-.usermatch-title {
+.score-title {
   font-size: 42px;
   font-weight: 400;
   text-align: center;
@@ -12,52 +15,6 @@
 
 .tables-container {
   display: flex;
-  width: 100%;
+  width: 70%;
   gap: 30px;
-}
-
-.score-table-container {
-  display: inline-block;
-  width: 50%;
-}
-
-.user-score-container {
-  display: flex;
-  width: 100%;
-  margin-bottom: 50px;
-  gap: 30px;
-  border: 1px solid white;
-  padding: 15px;
-}
-
-.user-score {
-  width: 50%;
-  font-size: 24px;
-}
-
-.score-title-h2 {
-  font-size: 22px;
-  margin-bottom: 20px;
-}
-
-.usermatch-table {
-  width: 100%;
-}
-  
-.usermatch-table-head {
-  border-bottom: 1px solid white;
-}
-
-.usermatch-table-head-column {
-  padding: 10px;
-  font-size: 18px;
-}
-
-.usermatch-table-body-column {
-  padding: 8px 10px;
-  font-size: 16px;
-}
-  
-.usermatch-table-body-row:nth-child(odd) {
-  background: rgba(255, 255, 255, 0.1);
 }
