@@ -19,7 +19,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
-app.use(cors({ origin: ['http://localhost:3000', 'https://meme-memory-game.vercel.app/'], credentials: true }));
+app.use(cors({ origin: ['http://localhost:3000', 'https://meme-memory-game.vercel.app/', 'https://memory-game-server.vercel.app'], credentials: true }));
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
