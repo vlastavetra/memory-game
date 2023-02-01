@@ -16,7 +16,7 @@ function Provider({ children }) {
   const headerConfig = { headers: { Authorization: `Bearer ${token}` } };
  
       const userInfos = await axios.get(
-        `http://localhost:8080/user/${userId}`,
+        `${process.env.REACT_APP_SERVER_URL}user/${userId}`,
         headerConfig
       );
       setCurrentUser(userInfos.data);
