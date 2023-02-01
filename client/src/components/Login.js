@@ -36,7 +36,7 @@ const [serverError, setServerError] = useState("")
   return (
     <>
       <Modal.Header closeButton className="modal-body-container">
-        <Modal.Title className="modal-body-container">Login</Modal.Title>
+        <Modal.Title className="modal-body-container text-white">Login</Modal.Title>
       </Modal.Header>
       <Modal.Body className="modal-body-container" >
         <div className="modal-container">
