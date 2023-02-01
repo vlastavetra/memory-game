@@ -15,8 +15,7 @@ function ModalLoginSign() {
     setOpenLoginModal,
     loginUser,
     setLoginUser,
-    successSignup,
-    setSuccessSignup,
+ 
   } = useContext(Context);
   const navigate = useNavigate();
 
