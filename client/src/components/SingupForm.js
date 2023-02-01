@@ -70,7 +70,7 @@ function SignupForm({ onClose }) {
       </div>
       <div className="form-first-part">
         <Form.Group controlId="username">
-          <div className="input-icon">
+          <div className="form-control-icon">
             <Form.Control
               type="text"
               onChange={handleChange}
@@ -83,7 +83,7 @@ function SignupForm({ onClose }) {
           </div>
         </Form.Group>
         <Form.Group controlId="firstName">
-          <div className="input-icon">
+          <div className="form-control-icon">
             <Form.Control
               type="text"
               onChange={handleChange}
@@ -96,7 +96,7 @@ function SignupForm({ onClose }) {
           </div>
         </Form.Group>
         <Form.Group controlId="lastName">
-          <div className="input-icon">
+          <div className="form-control-icon">
             <Form.Control
               type="text"
               onChange={handleChange}
@@ -110,7 +110,7 @@ function SignupForm({ onClose }) {
           </div>
         </Form.Group>
         <Form.Group controlId="email">
-          <div className="input-icon">
+          <div className="form-control-icon">
             <Form.Control
               type="email"
               onChange={handleChange}
@@ -124,7 +124,7 @@ function SignupForm({ onClose }) {
         </Form.Group>
 
         <Form.Group controlId="password">
-          <div className="input-icon">
+          <div className="form-control-icon">
             <Form.Control
               type={showPassword ? "text" : "password"}
               onChange={handleChange}
@@ -140,7 +140,7 @@ function SignupForm({ onClose }) {
           </div>
         </Form.Group>
         <Form.Group controlId="confirmPassword">
-          <div className="input-icon">
+          <div className="form-control-icon">
             <Form.Control
               type={showConfirmPassword ? "text" : "password"}
               onChange={handleChange}
@@ -162,7 +162,7 @@ function SignupForm({ onClose }) {
         </Form.Group>
       </div>
 
-      <div className="btns">
+      <div className="btns-signup">
         <Button type="submit" className="submit-btn-signup">
           Sign Up
         </Button>

@@ -1,3 +1,32 @@
 .form-container {
     background-color: #1B1523
 }
+
+.form-control-icon {
+    display: flex;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+
+  }
+  .form-control-icon .form-control {
+    flex: 1;
+  }
+
+  .btns-signup {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 10px;
+    color: white;
+  }
+
+  .icon-profile {
+    color: #343a40;
+    font-size: 1.5rem;
+    margin-right: 10px;
+    margin-left: 10px;
+
+  }
