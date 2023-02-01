@@ -9,30 +9,34 @@ const UserScore = () => {
   const [token, setToken] = useState("");
 
   const getUserLastScore = async () => {
-    try {
-      const res = await axios.get(
-        `http://127.0.0.1:8080/scores/last/${userId}`,
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
-      );
-      setUserLastScore(res.data[0].score);
-    } catch (err) {
-      console.log(err);
+    if (userId) {
+      try {
+        const res = await axios.get(
+          `http://127.0.0.1:8080/scores/last/${userId}`,
+          {
+            headers: { authorization: `Bearer ${token}` },
+          }
+        );
+        setUserLastScore(res.data[0].score);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
   const getUserHighScore = async () => {
-    try {
-      const res = await axios.get(
-        `http://127.0.0.1:8080/scores/high/${userId}`,
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
-      );
-      setUserHighScore(res.data[0].score);
-    } catch (err) {
-      console.log(err);
+    if (userId) {
+      try {
+        const res = await axios.get(
+          `http://127.0.0.1:8080/scores/high/${userId}`,
+          {
+            headers: { authorization: `Bearer ${token}` },
+          }
+        );
+        setUserHighScore(res.data[0].score);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -47,11 +51,11 @@ const UserScore = () => {
     <div className="user-score-container">
       <div className="user-score">
         <span>Your last score: </span>
-        <span>{userLastScore}</span>
+        <span>{userLastScore && userLastScore}</span>
       </div>
       <div className="user-score">
         <span>Your high score: </span>
-        <span>{userHighScore}</span>
+        <span>{userHighScore && userHighScore}</span>
       </div>
     </div>
   );
