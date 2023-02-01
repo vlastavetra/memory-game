@@ -9,7 +9,7 @@ const AllUserHistoryScore = () => {
 
   const getAllUsersData = async () => {
     try {
-      const res = await axios.get(`http://127.0.0.1:8080/scores`, {
+      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}scores`, {
         headers: { authorization: `Bearer ${token}` },
       });
       setAllUsersScore(res.data);

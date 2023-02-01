@@ -12,7 +12,7 @@ const UserScore = () => {
     if (userId) {
       try {
         const res = await axios.get(
-          `http://127.0.0.1:8080/scores/last/${userId}`,
+          `${process.env.REACT_APP_SERVER_URL}scores/last/${userId}`,
           {
             headers: { authorization: `Bearer ${token}` },
           }
@@ -28,7 +28,7 @@ const UserScore = () => {
     if (userId) {
       try {
         const res = await axios.get(
-          `http://127.0.0.1:8080/scores/high/${userId}`,
+          `${process.env.REACT_APP_SERVER_URL}scores/high/${userId}`,
           {
             headers: { authorization: `Bearer ${token}` },
           }
