@@ -20,6 +20,7 @@ function Provider({ children }) {
         headerConfig
       );
       console.log(res.data);
+      console.log('hi im the context');
      
     } catch (error) {
       console.log(error);
