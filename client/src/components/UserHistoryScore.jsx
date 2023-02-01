@@ -10,7 +10,7 @@ const UserHistoryScore = () => {
 
   const getUserHistoryScore = async () => {
     try {
-      const res = await axios.get(`http://127.0.0.1:8080/scores/${userId}`, {
+      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}scores/${userId}`, {
         headers: { authorization: `Bearer ${token}` },
       });
       setUserHistoryScore(res.data);
