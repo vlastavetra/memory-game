@@ -14,7 +14,7 @@ useEffect(() => {
     getUserInfos().catch(error => {
       console.error(error.message);
     });
-  }, []);
+  }, [getUserInfos]);
 
   return (
     <>
