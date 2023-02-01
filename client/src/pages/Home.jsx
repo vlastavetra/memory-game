@@ -5,6 +5,7 @@ import "./Home.css";
 import { useContext } from "react";
 import Context, { Provider } from "../context/context";
 import { useEffect } from "react";
+import UserScore from "../components/UserScore";
 
 const Home = () => {
   const { getUserInfos, currentUser, loginUser } = useContext(Context);
@@ -28,7 +29,7 @@ const Home = () => {
           <div className="logo-container">
             <img src={logo} alt="memory-meme-logo" />
           </div>
-          <div>"Score component with current user's last game score and highest score"</div>
+          <div><UserScore/></div>
           <div className="button-container">
             <NavLink to="/game">
               <button className="main-button">PLAY</button>
