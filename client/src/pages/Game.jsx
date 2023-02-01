@@ -4,6 +4,8 @@ import Board from '../components/Board/Board';
 import shuffleCards from "../utilities/shuffleCards";
 import uniqueCardsArray from "../utilities/uniqueCardsArray";
 import sound1 from "../assets/sounds/winharpsichord-39642.mp3";
+import sound2 from "../assets/sounds/clickselect2-92097.mp3";
+import sound3 from "../assets/sounds/computer-processing-sound-effects-short-click-select-03-122132.mp3";
 import "./Game.css";
 
 const Game = () => {
@@ -89,6 +91,9 @@ const Game = () => {
   }, [clearedCards]);
 
   useEffect(() => {
+    const changeModeSound = new Audio(sound2);
+    changeModeSound.currentTime = .1;
+    changeModeSound.play();
     handleRestart();
   }, [mode]);
 
@@ -101,6 +106,8 @@ const Game = () => {
   };
 
   const handleRestart = () => {
+    const restartSound = new Audio(sound3);
+    restartSound.play();
     setClearedCards({});
     setOpenCards([]);
     setShowModal(false);
