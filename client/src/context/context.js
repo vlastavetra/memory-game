@@ -8,9 +8,9 @@ function Provider({ children }) {
   const [isOpen, setIsOpen] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const toggleModal = () => setIsOpen(!isOpen);
-  const [loginUser, setLoginUser] = useState(false);
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
+  const [loginUser, setLoginUser] = useState(token && true);
   
   const getUserInfos = async () => {
   const headerConfig = { headers: { Authorization: `Bearer ${token}` } };
