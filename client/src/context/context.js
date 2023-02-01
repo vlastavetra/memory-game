@@ -10,22 +10,18 @@ function Provider({ children }) {
   const toggleModal = () => setIsOpen(!isOpen);
   const [loginUser, setLoginUser] = useState(false);
   const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
   
   const getUserInfos = async () => {
-    const token = localStorage.getItem("token");
-    const headerConfig = { headers: { Authorization: `Bearer ${token}` } };
-    try {
-      const res = await axios.get(
+  const headerConfig = { headers: { Authorization: `Bearer ${token}` } };
+ 
+      const userInfos = await axios.get(
         `http://localhost:8080/user/${userId}`,
         headerConfig
       );
-      console.log(res.data);
-      console.log('hi im the context');
+      setCurrentUser(userInfos.data);
      
-    } catch (error) {
-      console.log(error);
-      alert(error.response.data.error);
-    }
+   
   };
 
   const valueToShare = {
