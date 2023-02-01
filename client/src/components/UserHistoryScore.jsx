@@ -6,7 +6,7 @@ import "./UserHistoryScore.css";
 const UserHistoryScore = () => {
   const [userHistoryScore, setUserHistoryScore] = useState([]);
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   const getUserHistoryScore = async () => {
     try {
