@@ -6,12 +6,13 @@ import { useContext } from "react";
 import Context, { Provider } from "../context/context";
 import { useEffect } from "react";
 import UserScore from "../components/UserScore";
+import { useMemo } from "react";
 
 const Home = () => {
   const { getUserInfos, currentUser, loginUser } = useContext(Context);
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
+  useMemo(() => {
     getUserInfos().catch((error) => {
       console.error(error.message);
     });
